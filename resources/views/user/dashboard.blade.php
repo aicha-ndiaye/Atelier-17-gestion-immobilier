@@ -91,7 +91,7 @@
                 <div class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
 
                     <span class="inline-flex rounded-md shadow ml-2">
-                        <a href="/signup"
+                        <a href="{{ route('logout') }}"
                             class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 transition duration-150 ease-in-out">
                             Log Out
                         </a>
