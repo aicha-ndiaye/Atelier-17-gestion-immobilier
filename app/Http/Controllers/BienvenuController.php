@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\bien;
-use App\Http\Requests\StorebienRequest;
-use App\Http\Requests\UpdatebienRequest;
+use Illuminate\Http\Request;
 
-use function Ramsey\Uuid\v1;
-
-class BienController extends Controller
+class BienvenuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.ajoutbien');
+        return view('welcome');
     }
 
     /**
@@ -23,13 +19,13 @@ class BienController extends Controller
      */
     public function create()
     {
-        return view('admin.voirdetails');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorebienRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -37,7 +33,7 @@ class BienController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(bien $bien)
+    public function show(string $id)
     {
         //
     }
@@ -45,7 +41,7 @@ class BienController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(bien $bien)
+    public function edit(string $id)
     {
         //
     }
@@ -53,7 +49,7 @@ class BienController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatebienRequest $request, bien $bien)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -61,7 +57,7 @@ class BienController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(bien $bien)
+    public function destroy(string $id)
     {
         //
     }

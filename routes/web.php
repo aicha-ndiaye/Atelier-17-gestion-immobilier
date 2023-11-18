@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BienController;
+use App\Http\Controllers\BienvenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BienvenuController::class, 'index']);
 
+Route::get('/ajout/bien', [BienController::class, 'index'])->name('admin.ajoutbien');
+Route::get('/detail/produit', [BienController::class, 'create']);
 Route::get('/dashboard', function () {
     return view('user/dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
