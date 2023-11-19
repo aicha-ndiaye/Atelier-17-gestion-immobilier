@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('localisation');
             $table->enum('statu',['disponible','occupe']);
+            $table->string('adresse');
             $table->date('datePublication');
             $table->timestamps();
         });
