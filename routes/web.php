@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [BienvenuController::class, 'index']);
 
 Route::get('/ajout/bien', [BienController::class, 'index'])->name('admin.ajoutbien');
-Route::post("/ajouterBien",[BienController::class,"store"]);
+Route::post("/dashboard/admin/ajouterBien",[BienController::class,"store"]);
 Route::get('/detail/produit', [BienController::class, 'create']);
 Route::get('/dashboard', function () {
     return view('user/dashboard');

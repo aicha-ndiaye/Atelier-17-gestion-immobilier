@@ -32,7 +32,7 @@ class BienController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'nom' => 'required',
             'categorie' => 'required',
             'statut' => 'required',
@@ -40,6 +40,7 @@ class BienController extends Controller
             'image' => 'required',
             'description' => 'nullable',
         ]);
+        dd($request);
         $bien= new Bien();
         $bien->nom=$request->nom;
         $bien->categorie=$request->categorie;

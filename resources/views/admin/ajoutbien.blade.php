@@ -13,7 +13,7 @@
     </div>
 
     <div class="p-6 space-y-6">
-        <form action="/ajouterBien" method="post">
+        <form action="/dashboard/admin/ajouterBien" method="post">
             @csrf
             <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">
