@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\bien;
 use App\Http\Requests\StorebienRequest;
 use App\Http\Requests\UpdatebienRequest;
+use Illuminate\Http\Request;
 
 use function Ramsey\Uuid\v1;
 
@@ -29,9 +30,31 @@ class BienController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorebienRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nom' => 'required',
+            'categorie' => 'required',
+            'statut' => 'required',
+            'adresse' => 'required',
+            'image' => 'required',
+            'description' => 'nullable',
+        ]);
+        $bien= new Bien();
+        $bien->nom=$request->nom;
+        $bien->categorie=$request->categorie;
+        $bien->image=$request->image;
+        $bien->description=$request->description;
+        $bien->localisation=$request->adresse;
+        $bien->statu=$request->statut;
+        $bien->datePublication=$request->date;
+      
+       
+       
+        // Bien::create($validatedData);
+
+        // return redirect()->route()->with("success","Bien enregistré avec succès");
+
     }
 
     /**

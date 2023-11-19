@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('categorie',['luxe','moyen']);
             $table->string('image');
             $table->text('description');
+            $table->text('localisation');
             $table->enum('statu',['disponible','occupe']);
             $table->date('datePublication');
             $table->timestamps();
