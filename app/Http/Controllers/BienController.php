@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\bien;
-use App\Http\Requests\StorebienRequest;
-use App\Http\Requests\UpdatebienRequest;
-
 use function Ramsey\Uuid\v1;
+use Illuminate\Http\Request;
+
+// use Illuminate\Support\Facades\Request;
+// use App\Http\Requests\Request;
 
 class BienController extends Controller
 {
@@ -29,9 +30,30 @@ class BienController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorebienRequest $request)
+    public function store(Request $request)
     {
-        //
+        $biens = new bien();
+        $request->validate([
+            'nombien'=>'required|min:2|max:25',
+            'categori'=>'required',
+            'adresse'=>'required',
+            'image'=>'required',
+            'description'=>'required',
+            'status'=>'required',
+        ]
+        );
+
+        $biens->nom = $request->nombien;
+        $biens->categorie=$request->categori;
+       $biens->image=$request->image;
+        $biens->description=$request->description;
+        $biens->statu=$request->status;
+        $biens->adresse=$request->adresse;
+        $biens->datePublication=$request->datepub;
+        if ($biens->save()) {
+            dd('ok');
+        }
+
     }
 
     /**
@@ -53,7 +75,7 @@ class BienController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatebienRequest $request, bien $bien)
+    public function update(Request $request, bien $bien)
     {
         //
     }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('image');
             $table->text('description');
             $table->enum('statu',['disponible','occupe']);
+            $table->string('adresse');
             $table->date('datePublication');
             $table->timestamps();
         });
