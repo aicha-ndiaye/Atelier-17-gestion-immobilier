@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\bien;
-use App\Http\Requests\StorebienRequest;
-use App\Http\Requests\UpdatebienRequest;
+use function Ramsey\Uuid\v1;
 use Illuminate\Http\Request;
 
-use function Ramsey\Uuid\v1;
+// use Illuminate\Support\Facades\Request;
+// use App\Http\Requests\Request;
 
 class BienController extends Controller
 {
@@ -32,29 +32,27 @@ class BienController extends Controller
      */
     public function store(Request $request)
     {
+        $biens = new bien();
         $request->validate([
-            'nom' => 'required',
-            'categorie' => 'required',
-            'statut' => 'required',
-            'adresse' => 'required',
-            'image' => 'required',
-            'description' => 'nullable',
-        ]);
-        dd($request);
-        $bien= new Bien();
-        $bien->nom=$request->nom;
-        $bien->categorie=$request->categorie;
-        $bien->image=$request->image;
-        $bien->description=$request->description;
-        $bien->localisation=$request->adresse;
-        $bien->statu=$request->statut;
-        $bien->datePublication=$request->date;
-      
-       
-       
-        // Bien::create($validatedData);
+            'nombien'=>'required|min:2|max:25',
+            'categori'=>'required',
+            'adresse'=>'required',
+            'image'=>'required',
+            'description'=>'required',
+            'status'=>'required',
+        ]
+        );
 
-        // return redirect()->route()->with("success","Bien enregistré avec succès");
+        $biens->nom = $request->nombien;
+        $biens->categorie=$request->categori;
+       $biens->image=$request->image;
+        $biens->description=$request->description;
+        $biens->statu=$request->status;
+        $biens->adresse=$request->adresse;
+        $biens->datePublication=$request->datepub;
+        if ($biens->save()) {
+            dd('ok');
+        }
 
     }
 
@@ -77,7 +75,7 @@ class BienController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatebienRequest $request, bien $bien)
+    public function update(Request $request, bien $bien)
     {
         //
     }
