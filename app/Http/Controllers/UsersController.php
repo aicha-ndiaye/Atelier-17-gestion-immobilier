@@ -13,9 +13,8 @@ class UsersController extends Controller
     public function index()
     {
         $biens = bien::all();
-        $commentaires = Commentaire::where('users_id', Auth::user()->id)->firstOrFail();
-        // dd($commentaires->auteur);
-
-        return view('user.dashboard', compact('biens', 'commentaires'));
+        $Commentaires = Commentaire::where('users_id', Auth::user()->id)->get();
+        // dd($Commentaires);
+        return view('user.dashboard', compact('biens', 'Commentaires'));
     }
 }
