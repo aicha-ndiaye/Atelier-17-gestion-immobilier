@@ -5,7 +5,7 @@
         <h3 class="text-xl font-semibold">
             Ajouter un bien
         </h3>
-        <a href=""
+        <a href="/back"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
             data-modal-toggle="product-modal">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +16,7 @@
 
     <div class="p-6 space-y-6">
         <form action="/savebien" method="Post">
-          @csrf
+            @csrf
             <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">
                     <label for="product-name" class="text-sm font-medium text-gray-900 block mb-2">Nom Bien</label>
@@ -74,9 +74,20 @@
             </div>
 
 
+<<<<<<< HEAD
     <div class="p-6 border-t border-gray-200 rounded-b">
         <button class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Enregistrer</button>
     </div>
 </form>
 </div>
 </div>
+=======
+            <div class="p-6 border-t border-gray-200 rounded-b">
+                <button
+                    class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    type="submit">Save all</button>
+            </div>
+        </form>
+    </div>
+</div>
+>>>>>>> feature/leye

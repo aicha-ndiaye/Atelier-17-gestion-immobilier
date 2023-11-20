@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\BienController;
 use App\Http\Controllers\BienvenuController;
+use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Models\bien;
 /*
@@ -26,25 +29,26 @@ Route::post("/dashboard/admin/ajouterBien",[BienController::class,"store"]);
 // Route::get('/detail/produit', [BienController::class, 'create']);
 Route::get('/ajout/bien', [BienController::class, 'create'])->name('admin.ajoutbien');
 
-Route::get('/dashboard', function () {
-    return view('user/dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [UsersController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard/admin', function () {
-    $biens= bien::all();
-    //  dd($biens);
-    return view('admin.dashboard',compact("biens"));
+Route::get('/dashboard/admin', [BienController::class, 'indexfirst'])->middleware(['admin'])->name('admin.dashboard');
 
-})->middleware(['admin'])->name('admin.dashboard');
-
-Route::middleware('admin')->group(function (){
+Route::middleware('admin')->group(function () {
     Route::get('/ajout/bien', [BienController::class, 'index'])->name('admin.ajoutbien');
-    Route::get('/detail/produit', [BienController::class, 'create']);
+    Route::get('/detail/produit/{id}', [BienController::class, 'create']);
     Route::post('/savebien', [BienController::class, 'store']);
+    Route::post('/update/bien/{id}', [BienController::class, 'update']);
+    Route::get('/back', function () {
+        return redirect('/dashboard/admin');
+    });
+    Route::get('/delete/produit/{id}', [BienController::class, 'delete']);
+    Route::get('/modifier/produit/{id}', [BienController::class, 'edit']);
 });
 
 Route::middleware('auth')->group(function () {
 
+    Route::post('/commentaire/{id1}/{id2}', [CommentaireController::class, 'store']);
+    Route::get('/commentaire/{id}', [CommentaireController::class, 'create']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

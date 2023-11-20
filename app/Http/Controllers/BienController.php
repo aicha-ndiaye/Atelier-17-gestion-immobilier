@@ -14,6 +14,11 @@ class BienController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function indexfirst()
+    {
+        $biens = bien::all();
+        return view('/admin/dashboard', compact('biens'));
+    }
     public function index()
     {    $biens= bien::all();
         //  dd($biens);
@@ -25,10 +30,11 @@ class BienController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.ajoutbien');
-        // return view('admin.voirdetails');
+
+        $biens = bien::FindOrFail($request->id);
+        return view('admin.voirdetails', compact('biens'));
     }
 
     /**
@@ -37,27 +43,27 @@ class BienController extends Controller
     public function store(Request $request)
     {
         $biens = new bien();
-        $request->validate([
-            'nombien'=>'required|min:2|max:25',
-            'categori'=>'required',
-            'adresse'=>'required',
-            'image'=>'required',
-            'description'=>'required',
-            'status'=>'required',
-        ]
+        $request->validate(
+            [
+                'nombien' => 'required|min:2|max:25',
+                'categori' => 'required',
+                'adresse' => 'required',
+                'image' => 'required',
+                'description' => 'required',
+                'status' => 'required',
+            ]
         );
 
         $biens->nom = $request->nombien;
-        $biens->categorie=$request->categori;
-       $biens->image=$request->image;
-        $biens->description=$request->description;
-        $biens->statu=$request->status;
-        $biens->adresse=$request->adresse;
-        $biens->datePublication=$request->datepub;
+        $biens->categorie = $request->categori;
+        $biens->image = $request->image;
+        $biens->description = $request->description;
+        $biens->statu = $request->status;
+        $biens->adresse = $request->adresse;
+        $biens->datePublication = $request->datepub;
         if ($biens->save()) {
             dd('ok');
         }
-
     }
 
     /**
@@ -71,24 +77,49 @@ class BienController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(bien $bien)
+    public function edit(Request $request)
     {
-        //
+        $bien = bien::FindOrFail($request->id);
+        return view('admin.Modifierbien', compact('bien'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, bien $bien)
+    public function update(Request $request)
     {
-        //
+        $bien = bien::FindOrFail($request->id);
+        $request->validate(
+            [
+                'nombien' => 'required|min:2|max:25',
+                'categori' => 'required',
+                'adresse' => 'required',
+                'image' => 'required',
+                'description' => 'required',
+                'status' => 'required',
+            ]
+        );
+
+        $bien->nom = $request->nombien;
+        $bien->categorie = $request->categori;
+        $bien->image = $request->image;
+        $bien->description = $request->description;
+        $bien->statu = $request->status;
+        $bien->adresse = $request->adresse;
+        $bien->datePublication = $request->datepub;
+        if ($bien->save()) {
+            dd('ok c fait la modif');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(bien $bien)
+    public function delete(Request $request)
     {
-        //
+        $biens = bien::FindOrFail($request->id);
+        if ($biens->delete()) {
+            return redirect('/dashboard/admin');
+        }
     }
 }

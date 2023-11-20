@@ -1,4 +1,5 @@
 <script src="https://cdn.tailwindcss.com"></script>
+
 <!-- component -->
 <!DOCTYPE html>
 <html class="h-full" lang="en">
@@ -106,59 +107,67 @@
                         Modifier Vos Commentaires
                     </h1>
                     <ul>
-                        <li>
-                            <article tabindex="0"
-                                class="cursor-pointer border rounded-md p-3 bg-white flex text-gray-700 mb-2 hover:border-green-500 focus:outline-none focus:border-green-500">
-                                <span class="flex-none pt-1 pr-2">
-                                    <img class="h-8 w-8 rounded-md"
-                                        src="https://raw.githubusercontent.com/bluebrown/tailwind-zendesk-clone/master/public/assets/avatar.png" />
-                                </span>
-                                <div class="flex-1">
-                                    <header class="mb-1">
-                                        Tarun T <span class="font-semibold">commented</span> on
-                                        <h1 class="inline">"RE: WPMS issue".</h1>
-                                    </header>
-                                    <p class="text-gray-600">
-                                        Hi Mazhar, Please note this issue comes when user is not
-                                        closing or logout sy…
-                                    </p>
-                                    <footer class="text-gray-500 mt-2 text-sm">
-                                        Friday 22:16
-                                    </footer>
-                                </div>
-                            </article>
-                        </li>
+                        @foreach ($Commentaires as $commentaire)
+                            <a href="/details/commentaires/{{ $commentaire->id }}/{{ Auth::User()->id }}">
+                                <li>
+                                    <article tabindex="0"
+                                        class="cursor-pointer border rounded-md p-3 bg-white flex text-gray-700 mb-2 hover:border-green-500 focus:outline-none focus:border-green-500">
+                                        <span class="flex-none pt-1 pr-2">
+                                            <img class="h-8 w-8 rounded-md"
+                                                src="https://raw.githubusercontent.com/bluebrown/tailwind-zendesk-clone/master/public/assets/avatar.png" />
+                                        </span>
+                                        <div class="flex-1">
+                                            <header class="mb-1">
+                                                <span class="font-semibold">{{ $commentaire->auteur }}</span> on
+                                                <h1 class="inline">"RE: {{ $commentaire->contenu }}".</h1>
+                                            </header>
+                                            <p class="text-gray-600">
+
+                                            </p>
+
+                                            <footer class="text-gray-500 mt-2 text-sm">
+                                                @php
+                                                    \Carbon\Carbon::setLocale('fr');
+                                                    $date = \Carbon\Carbon::parse($commentaire->datePublication);
+                                                @endphp
+                                                {{ $date->isoFormat('dddd, le, D MMMM') }}
+                                            </footer>
+                                        </div>
+                                    </article>
+                                </li>
+                            </a>
+                        @endforeach
                     </ul>
                 </section>
+
                 <ul class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
+                    @foreach ($biens as $bien)
+                        <li class="relative flex flex-col sm:flex-row xl:flex-col items-start">
+                            <div class="order-1 sm:ml-6 xl:ml-0">
+                                <h3 class="mb-1 text-slate-900 font-semibold dark:text-slate-200">
+                                    <span
+                                        class="mb-1 block text-sm leading-6 text-cyan-500">{{ $bien->nom }}</span>{{ $bien->status }}
+                                </h3>
+                                <h3 class="mb-1 text-slate-900 font-semibold dark:text-slate-200">
+                                    <span class="mb-1 block text-sm leading-6 text-cyan-500">{{ $bien->statu }}</span>
+                                </h3>
+                                <h3 class="mb-1 text-slate-900 font-semibold dark:text-slate-200">
+                                    <span
+                                        class="mb-1 block text-sm leading-6 text-cyan-500">{{ $bien->categorie }}</span>
+                                </h3>
+                                <div class="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
+                                    <p>{{ $bien->description }}</p>
+                                    <h3 class="mb-1 text-slate-900 font-semibold dark:text-slate-200">
+                                        <span
+                                            class="mb-1 block text-sm leading-6 text-cyan-500">{{ $bien->datePublication }}</span>
+                                    </h3>
 
-
-                    <li class="relative flex flex-col sm:flex-row xl:flex-col items-start">
-                        <div class="order-1 sm:ml-6 xl:ml-0">
-                            <h3 class="mb-1 text-slate-900 font-semibold dark:text-slate-200">
-                                <span class="mb-1 block text-sm leading-6 text-cyan-500">Hero Patterns</span>Seamless
-                                SVG background
-                                patterns by the makers of Tailwind CSS.
-                            </h3>
-                            <div class="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
-                                <p>A collection of over 100 free MIT-licensed high-quality SVG patterns for you to use
-                                    in your web
-                                    projects.</p>
-                            </div><a
-                                class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                                href="https://heropatterns.com">Learn
-                                more<span class="sr-only">, Seamless SVG background patterns by the makers of Tailwind
-                                    CSS.</span><svg
-                                    class="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
-                                    width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M0 0L3 3L0 6"></path>
-                                </svg></a>
-                        </div><img src="https://tailwindcss.com/_next/static/media/heropatterns@75.82a09697.jpg"
-                            alt=""
-                            class="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full"
-                            width="1216" height="640">
-                    </li>
+                                </div><a
+                                    class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
+                                    href="https://heropatterns.com">Voir plus<span class="sr-only"></a>
+                            </div><img src="{{ asset('images/' . $bien->image) }}" alt="" width="100%">
+                        </li>
+                    @endforeach
                 </ul>
 
                 <!-- section content -->

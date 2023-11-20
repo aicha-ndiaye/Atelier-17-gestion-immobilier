@@ -7,18 +7,21 @@
                     <img class="w-full h-full object-cover" src="{{ asset('images/' . $biens->image) }}"
                         alt="Product Image">
                 </div>
+
                 <div class="flex -mx-2 mb-4">
-                    <div class="w-1/2 px-2">
-                        <a href="/modifier/produit/{{ $biens->id }}"
-                            class="w-full bg-green-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700"
-                            name="modifer">modifier les informations</a>
-                    </div>
-                    <div class="w-1/2 px-2">
-                        <button
-                            class="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">Voir
-                            Commentaires</button>
+                    <div class="w-2 px-2 flex items-center">
+                        <form action="/commentaire/{{ $biens->id }}/{{ Auth::User()->id }}" method="post">
+                            @csrf
+                            <input type="text" name="commentaire" class="mr-2" name="commentaire"
+                                placeholder="Enter your comment here" required>
+
+                            <button type="submit"
+                                class="bg-green-900 dark:bg-gray-600 text-white py-2 px-9 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700 "
+                                name="modifer">Ajouter</button>
+                        </form>
                     </div>
                 </div>
+
             </div>
             <div class="md:flex-1 px-4">
                 <div style="margin-left:90%">
