@@ -108,32 +108,34 @@
                     </h1>
                     <ul>
                         @foreach ($Commentaires as $commentaire)
-                            <li>
-                                <article tabindex="0"
-                                    class="cursor-pointer border rounded-md p-3 bg-white flex text-gray-700 mb-2 hover:border-green-500 focus:outline-none focus:border-green-500">
-                                    <span class="flex-none pt-1 pr-2">
-                                        <img class="h-8 w-8 rounded-md"
-                                            src="https://raw.githubusercontent.com/bluebrown/tailwind-zendesk-clone/master/public/assets/avatar.png" />
-                                    </span>
-                                    <div class="flex-1">
-                                        <header class="mb-1">
-                                            <span class="font-semibold">{{ $commentaire->auteur }}</span> on
-                                            <h1 class="inline">"RE: {{ $commentaire->contenu }}".</h1>
-                                        </header>
-                                        <p class="text-gray-600">
+                            <a href="/details/commentaires/{{ $commentaire->id }}/{{ Auth::User()->id }}">
+                                <li>
+                                    <article tabindex="0"
+                                        class="cursor-pointer border rounded-md p-3 bg-white flex text-gray-700 mb-2 hover:border-green-500 focus:outline-none focus:border-green-500">
+                                        <span class="flex-none pt-1 pr-2">
+                                            <img class="h-8 w-8 rounded-md"
+                                                src="https://raw.githubusercontent.com/bluebrown/tailwind-zendesk-clone/master/public/assets/avatar.png" />
+                                        </span>
+                                        <div class="flex-1">
+                                            <header class="mb-1">
+                                                <span class="font-semibold">{{ $commentaire->auteur }}</span> on
+                                                <h1 class="inline">"RE: {{ $commentaire->contenu }}".</h1>
+                                            </header>
+                                            <p class="text-gray-600">
 
-                                        </p>
+                                            </p>
 
-                                        <footer class="text-gray-500 mt-2 text-sm">
-                                            @php
-                                                \Carbon\Carbon::setLocale('fr');
-                                                $date = \Carbon\Carbon::parse($commentaire->datePublication);
-                                            @endphp
-                                            {{ $date->isoFormat('dddd, le, D MMMM') }}
-                                        </footer>
-                                    </div>
-                                </article>
-                            </li>
+                                            <footer class="text-gray-500 mt-2 text-sm">
+                                                @php
+                                                    \Carbon\Carbon::setLocale('fr');
+                                                    $date = \Carbon\Carbon::parse($commentaire->datePublication);
+                                                @endphp
+                                                {{ $date->isoFormat('dddd, le, D MMMM') }}
+                                            </footer>
+                                        </div>
+                                    </article>
+                                </li>
+                            </a>
                         @endforeach
                     </ul>
                 </section>
