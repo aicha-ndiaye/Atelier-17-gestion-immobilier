@@ -126,36 +126,48 @@
                                     description</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status</th>
+                                    image</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Adresse</th>
                                 <th <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    adresse</th>
+                                    Status</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Action</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">Jane Doe</td>
-                                <td class="px-6 py-4 whitespace-nowrap">jane@example.com</td>
-                                <td class="px-6 py-4 whitespace-nowrap">Admin</td>
-                                <td class="px-6 py-4 whitespace-nowrap">Admin</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="/detail/produit"
-                                        class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">Voir
-                                        Deatils</a>
-                                    <button
-                                        class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out">Delete</button>
-                                </td>
-                            </tr>
+                            @foreach ($biens as $bien)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $bien->nom }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $bien->categorie }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
 
+
+                                        {{ Str::words($bien->description, $words = 10, $end = '...') }}
+
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap"><img
+                                            src="{{ asset('images/' . $bien->image) }}" alt="" width="50px">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $bien->adresse }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{ $bien->statu }}</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <a href="/detail/produit/{{ $bien->id }}"
+                                            class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">Voir
+                                            Deatils</a>
+                                        <a href="/delete/produit/{{ $bien->id }}"
+                                            class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
-
+                <i class="fa-solid fa-comment-dots"></i>
                 <!-- section content -->
