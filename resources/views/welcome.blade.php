@@ -91,7 +91,18 @@
                                     <a href="/commentaire/{{ $bien->id }}"
                                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                                         data-modal-toggle="product-modal">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                        @php
+                                            $leye = 0;
+                                        @endphp
+                                        @foreach ($Commentaires as $comm)
+                                            @if ($bien->id == $comm->bien_id)
+                                                @php
+                                                    $leye++;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+
+                                        {{ $leye }}<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M2 5a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2h-2l-4 4v-4H4a2 2 0 01-2-2V5z">

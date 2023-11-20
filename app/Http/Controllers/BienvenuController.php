@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bien;
+use App\Models\commentaire;
 use Illuminate\Http\Request;
 
 class BienvenuController extends Controller
@@ -12,8 +13,9 @@ class BienvenuController extends Controller
      */
     public function index()
     {
+        $Commentaires = commentaire::all();
         $biens = bien::all();
-        return view('welcome', compact('biens'));
+        return view('welcome', compact('biens', 'Commentaires'));
     }
 
     /**
