@@ -40,6 +40,8 @@ Route::middleware('admin')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+
+    Route::post('/commentaire/{id1}/{id2}', [CommentaireController::class, 'store']);
     Route::get('/commentaire/{id}', [CommentaireController::class, 'create']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

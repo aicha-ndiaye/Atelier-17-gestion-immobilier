@@ -1,4 +1,8 @@
 <script src="https://cdn.tailwindcss.com"></script>
+@php
+    \Carbon\Carbon::setLocale('fr');
+    $date = \Carbon\Carbon::parse($commentaires->datePublication);
+@endphp
 <!-- component -->
 <!DOCTYPE html>
 <html class="h-full" lang="en">
@@ -106,6 +110,7 @@
                         Modifier Vos Commentaires
                     </h1>
                     <ul>
+                        {{-- @foreach ($commentaires as $commentaire) --}}
                         <li>
                             <article tabindex="0"
                                 class="cursor-pointer border rounded-md p-3 bg-white flex text-gray-700 mb-2 hover:border-green-500 focus:outline-none focus:border-green-500">
@@ -115,19 +120,21 @@
                                 </span>
                                 <div class="flex-1">
                                     <header class="mb-1">
-                                        Tarun T <span class="font-semibold">commented</span> on
-                                        <h1 class="inline">"RE: WPMS issue".</h1>
+                                        <span class="font-semibold">{{ $commentaires->auteur }}</span> on
+                                        <h1 class="inline">"RE: {{ $commentaires->contenu }}".</h1>
                                     </header>
                                     <p class="text-gray-600">
-                                        Hi Mazhar, Please note this issue comes when user is not
-                                        closing or logout sy…
+
                                     </p>
+
                                     <footer class="text-gray-500 mt-2 text-sm">
-                                        Friday 22:16
+
+                                        {{ $date->isoFormat('dddd, le, D MMMM') }}
                                     </footer>
                                 </div>
                             </article>
                         </li>
+                        {{-- @endforeach --}}
                     </ul>
                 </section>
 

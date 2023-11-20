@@ -20,8 +20,13 @@
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
-                        <a href="{{ url('/dashboard') }}"
-                            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                        @if (Auth::User()->role == 'admin')
+                            <a href="{{ url('/dashboard/admin') }}"
+                                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                        @else
+                            <a href="{{ url('/dashboard') }}"
+                                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                        @endif
                     @else
                         <a href="{{ route('login') }}"
                             class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
@@ -64,12 +69,13 @@
                     fonctionnelle, proche des commodités de la ville.
                 </p>
             </div>
-            @foreach ($biens as $bien)
-                <div class="row">
-                    <div class="col">
-                        <div class="w-full md:w-1/3 px-4 mb-8">
-                            <div class="rounded-md bg-white shadow-md p-8">
 
+            <div class="col">
+                @foreach ($biens as $bien)
+                    <div class="w-full md:w-1/3 px-4 mb-8">
+                        <div class="rounded-md bg-white shadow-md p-8">
+
+                            <div class="flex flex-wrap">
                                 <div class="text-4xl font-bold text-purple-600 mb-4">{{ $bien->nom }}</div>
 
                                 <div><img src="{{ asset('images/' . $bien->image) }}" alt="" width="70%"
@@ -95,13 +101,12 @@
                                 </div>
                             </div>
 
+
                         </div>
 
                     </div>
-
-
-                </div>
-            @endforeach
+                @endforeach
+            </div>
 
 
 

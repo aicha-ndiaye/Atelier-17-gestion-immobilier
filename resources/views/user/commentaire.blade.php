@@ -7,10 +7,12 @@
                     <img class="w-full h-full object-cover" src="{{ asset('images/' . $biens->image) }}"
                         alt="Product Image">
                 </div>
+
                 <div class="flex -mx-2 mb-4">
                     <div class="w-2 px-2 flex items-center">
-                        <form action="" method="post">
-                            <input type="text" name="commentaire" class="mr-2"
+                        <form action="/commentaire/{{ $biens->id }}/{{ Auth::User()->id }}" method="post">
+                            @csrf
+                            <input type="text" name="commentaire" class="mr-2" name="commentaire"
                                 placeholder="Enter your comment here" required>
 
                             <button type="submit"

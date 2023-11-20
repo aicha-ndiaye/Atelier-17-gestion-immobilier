@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bien;
+use App\Models\User;
 use App\Models\commentaire;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,9 +25,21 @@ class CommentaireController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($id1, $id2, Request $request)
     {
-        //
+        $biens = bien::FindOrFail($id1);
+        $user = User::FindOrFail($id2);
+        $comments = new Commentaire();
+        $comments->auteur = $user->name;
+        $comments->users_id = $user->id;
+        $comments->bien_id = $biens->id;
+        $comments->contenu = $request->commentaire;
+        $comments->dateCommentaire = new \DateTime();
+        if ($comments->save()) {
+            dd('okay c bon');
+        } else {
+            dd('error');
+        }
     }
 
     /**
