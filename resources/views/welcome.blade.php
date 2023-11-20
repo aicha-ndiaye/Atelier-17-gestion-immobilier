@@ -60,17 +60,16 @@
                     fonctionnelle, proche des commodités de la ville.
                 </p>
             </div>
+            @foreach($biens as $bien)
             <div class="flex flex-wrap -mx-4 mt-12">
                 <div class="w-full md:w-1/3 px-4 mb-8">
                     <div class="rounded-md bg-white shadow-md p-8">
                         <div class="text-4xl font-bold text-purple-600 mb-4">01</div>
-                        <h3 class="text-2xl font-bold mb-4">Feature 1</h3>
-                        <p class="text-gray-600 mb-4">Cette propriété luxueuse offre une expérience de vie inégalée avec
-                            un design impressionnant. C'est une occasion unique d'acquérir une maison élégante et
-                            fonctionnelle, proche des commodités de la ville.</p>
+                        <h3 class="text-2xl font-bold mb-4">{{$bien->nom}}</h3>
+                        <p class="text-gray-600 mb-4">{{$bien->description}}</p>
                     </div>
                 </div>
-
+                @endforeach
             </div>
 
 

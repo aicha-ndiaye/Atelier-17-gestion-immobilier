@@ -4,7 +4,7 @@ use App\Http\Controllers\BienController;
 use App\Http\Controllers\BienvenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\bien;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,17 +18,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BienvenuController::class, 'index']);
 
-Route::get('/ajout/bien', [BienController::class, 'index'])->name('admin.ajoutbien');
-Route::post("/dashboard/admin/ajouterBien",[BienController::class,"store"]);
-Route::get('/detail/produit', [BienController::class, 'create']);
+// Route::get('/ajout/bien', [BienController::class, 'index'])->name('admin.ajoutbien');
+Route::get('/dashboard/admin/listes', [BienController::class, 'index']);
 
+Route::post("/dashboard/admin/ajouterBien",[BienController::class,"store"]);
+
+// Route::get('/detail/produit', [BienController::class, 'create']);
+Route::get('/ajout/bien', [BienController::class, 'create'])->name('admin.ajoutbien');
 
 Route::get('/dashboard', function () {
     return view('user/dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard/admin', function () {
-    return view('admin/dashboard');
+    $biens= bien::all();
+    //  dd($biens);
+    return view('admin.dashboard',compact("biens"));
+
 })->middleware(['admin'])->name('admin.dashboard');
 
 Route::middleware('admin')->group(function (){

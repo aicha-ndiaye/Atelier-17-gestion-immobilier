@@ -15,8 +15,11 @@ class BienController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('admin.ajoutbien');
+    {    $biens= bien::all();
+        //  dd($biens);
+        return view('admin.dashboard',compact("biens"));
+        // $biens= bien::all();
+        // return view('admin.ajoutbien');
     }
 
     /**
@@ -24,7 +27,8 @@ class BienController extends Controller
      */
     public function create()
     {
-        return view('admin.voirdetails');
+        return view('admin.ajoutbien');
+        // return view('admin.voirdetails');
     }
 
     /**

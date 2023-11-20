@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\bien;
 class BienvenuController extends Controller
 {
     /**
@@ -11,7 +11,9 @@ class BienvenuController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $biens= bien::all();
+        // dd($biens);
+        return view('welcome',compact("biens"));
     }
 
     /**
