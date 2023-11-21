@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\bien;
 use App\Models\commentaire;
 use Illuminate\Http\Request;
+
 class BienvenuController extends Controller
 {
     /**
