@@ -22,11 +22,10 @@ class BienController extends Controller
         return view('/admin/dashboard', compact('biens'));
     }
     public function index()
-    {    $biens= bien::all();
-        //  dd($biens);
-        return view('admin.dashboard',compact("biens"));
-        // $biens= bien::all();
-        // return view('admin.ajoutbien');
+    {    
+        
+        return view('admin.ajoutbien');
+       
     }
 
     /**
