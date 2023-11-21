@@ -78,8 +78,7 @@
                             <div class="flex flex-wrap">
                                 <div class="text-4xl font-bold text-purple-600 mb-4">{{ $bien->nom }}</div>
 
-                                <div><img src="{{ asset('images/' . $bien->image) }}" alt="" width="70%"
-                                        style=""> </div>
+                                <div><img src="{{ asset('images/' . $bien->image) }}" alt="" width="70%"> </div>
                                 <h3 class="text-2xl font-bold mb-4">
                                     <span
                                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{ $bien->statu }}</span>
