@@ -1,6 +1,4 @@
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <div class="bg-gray-100 dark:bg-gray-800 py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row -mx-4">
@@ -9,18 +7,21 @@
                     <img class="w-full h-full object-cover" src="{{ asset('images/' . $biens->image) }}"
                         alt="Product Image">
                 </div>
+
                 <div class="flex -mx-2 mb-4">
-                    <div class="w-1/2 px-2">
-                        <a href="/modifier/produit/{{ $biens->id }}"
-                            class="w-full bg-green-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700"
-                            name="modifer">modifier les informations</a>
-                    </div>
-                    <div class="w-1/2 px-2">
-                        <a href=""
-                            class="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">Voir
-                            Commentaires</a>
+                    <div class="w-2 px-2 flex items-center">
+                        <form action="/commentaire/{{ $biens->id }}/{{ Auth::User()->id }}" method="post">
+                            @csrf
+                            <input type="text" name="commentaire" class="mr-2" name="commentaire"
+                                placeholder="Enter your comment here" required>
+
+                            <button type="submit"
+                                class="bg-green-900 dark:bg-gray-600 text-white py-2 px-9 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700 "
+                                name="modifer">Ajouter</button>
+                        </form>
                     </div>
                 </div>
+
             </div>
             <div class="md:flex-1 px-4">
                 <div style="margin-left:90%">
@@ -56,28 +57,4 @@
             </div>
         </div>
     </div>
-</div>
-<div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Auteur</th>
-                <th scope="col">Description</th>
-                <th scope="col">Date Commentaire</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-
-            @foreach ($Commentaires as $commentaire)
-                <tr>
-                    <th scope="row">{{ $commentaire->auteur }}</th>
-                    <td>{{ $commentaire->contenu }}</td>
-                    <td>{{ $commentaire->dateCommentaire }}</td>
-                    <td><a href="/commentaire/admin/suppression/{{ $commentaire->id }}" class="btn btn-danger">Supprimer</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
 </div>

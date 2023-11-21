@@ -54,6 +54,9 @@
             border-color: #78a300;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 
 <body class="antialiased h-full">
@@ -90,7 +93,18 @@
 
 
                 <div class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
+                    <div class="dropdown">
+                        <a class="btn btn-success dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::User()->firstname }}__{{ Auth::User()->name }}
+                        </a>
 
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/profile">Voir profil</a></li>
+
+                        </ul>
+                    </div>
+                    <a href="">{{ Auth::User()->name }}</a>
                     <span class="inline-flex rounded-md shadow ml-2">
                         <a href="{{ route('logout') }}"
                             class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 transition duration-150 ease-in-out">
@@ -164,10 +178,16 @@
 
                                 </div><a
                                     class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                                    href="https://heropatterns.com">Voir plus<span class="sr-only"></a>
+                                    href="/voir/details/{{ $bien->id }}">Voir plus<span class="sr-only"></a>
                             </div><img src="{{ asset('images/' . $bien->image) }}" alt="" width="100%">
                         </li>
                     @endforeach
                 </ul>
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+                    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+                    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+                </script>
 
                 <!-- section content -->

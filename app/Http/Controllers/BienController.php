@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\bien;
+use App\Models\commentaire;
 use function Ramsey\Uuid\v1;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 // use Illuminate\Support\Facades\Request;
 // use App\Http\Requests\Request;
@@ -31,9 +33,15 @@ class BienController extends Controller
     {
 
         $biens = bien::FindOrFail($request->id);
-        return view('admin.voirdetails', compact('biens'));
+        $Commentaires = commentaire::where('bien_id', $biens->id)->get();
+        return view('admin.voirdetails', compact('biens', 'Commentaires'));
     }
-
+    public function deletes(commentaire $commentaire)
+    {
+        if ($commentaire->delete()) {
+            return redirect('/dashboard/admin');
+        }
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -59,7 +67,9 @@ class BienController extends Controller
         $biens->adresse = $request->adresse;
         $biens->datePublication = $request->datepub;
         if ($biens->save()) {
-            dd('ok');
+            return redirect('/dashboard/admin');
+        } else {
+            dd('error');
         }
     }
 
@@ -105,17 +115,26 @@ class BienController extends Controller
         $bien->adresse = $request->adresse;
         $bien->datePublication = $request->datepub;
         if ($bien->save()) {
-            dd('ok c fait la modif');
+            return redirect('/dashboard/admin');
+        } else {
+            dd('error');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
+    public function showdetailsBien(Request $request){
+        $biens = bien::FindOrFail($request->id);
+        $Commentaires = commentaire::where('bien_id', $biens->id)->get();
+        return view('user.voirdetails', compact('biens', 'Commentaires'));
+
+    }
     public function delete(Request $request)
     {
         $biens = bien::FindOrFail($request->id);
         if ($biens->delete()) {
+
             return redirect('/dashboard/admin');
         }
     }

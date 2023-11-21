@@ -36,7 +36,7 @@ class CommentaireController extends Controller
         $comments->contenu = $request->commentaire;
         $comments->dateCommentaire = new \DateTime();
         if ($comments->save()) {
-            dd('okay c bon');
+            return redirect('/dashboard');
         } else {
             dd('error');
         }
@@ -45,32 +45,51 @@ class CommentaireController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(commentaire $commentaire)
+    public function show($id1, $id2, Request $request)
     {
-        //
+        $commentaire = commentaire::FindOrFail($id1);
+        $user = User::FindOrFail($id2);
+        return view('user.showcommentaire', compact('commentaire', 'user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(commentaire $commentaire)
+    public function edit($iduser, commentaire $commentaire)
     {
-        //
+        // dd($commentaire);
+        if ($commentaire->users_id == $iduser) {
+            return view('user.updatecomm', compact('commentaire'));
+        } else {
+            return abort(403);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatecommentaireRequest $request, commentaire $commentaire)
+    public function update(Request $request, commentaire $commentaire)
     {
-        //
+        $commentaire->contenu = $request->modif;
+        $commentaire->dateCommentaire = new \DateTime();
+        if ($commentaire->update()) {
+            return redirect('/dashboard');
+        } else {
+            dd('error');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(commentaire $commentaire)
+    public function destroy($iduser, commentaire $commentaire)
     {
-        //
+        if ($commentaire->users_id == $iduser) {
+            if ($commentaire->delete()) {
+                return redirect('/dashboard');
+            }
+        } else {
+            return abort(403);
+        }
     }
 }
